@@ -12,36 +12,26 @@ if(JSON.parse(localStorage.getItem("scheduler"))===null){
 }
 
 for (let i = 0; i < trList.length; i++) {
-    
     //console.log(stored[i])
-
     trList.eq(i).children().eq(1).children().eq(0).val(stored[i]);
-
-    
 }
 
-
 saveBtn.on("click", function (e) {
-    
     let rowNum = parseInt($(e.target).attr("id"));
-
     stored[rowNum] = trList.eq(rowNum).children().eq(1).children().eq(0).val();
     localStorage.setItem("scheduler", JSON.stringify(stored));
 
 });
-revBtn.on("click", function (e) {
-    
-    let rowNum = parseInt($(e.target).attr("id"));
 
+revBtn.on("click", function (e) {
+    let rowNum = parseInt($(e.target).attr("id"));
     trList.eq(rowNum).children().eq(1).children().eq(0).val(stored[rowNum]);
-    updateChart();
     localStorage.setItem("scheduler", JSON.stringify(stored));
 
 });
 
-
-
 function updateChart() {
+
     let now = moment();
     let hour = parseInt(now.format("HH"));
 
@@ -60,7 +50,5 @@ dayEl.text("Today is " + moment().format("dddd, MMMM Do, YYYY."));
 updateChart()
 
 var renderer = setInterval(function(){
-    
     updateChart();
-
 }, 60000);
