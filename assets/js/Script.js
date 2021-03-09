@@ -20,21 +20,17 @@ saveBtn.on("click", function (e) {
     let rowNum = parseInt($(e.target).attr("id"));
     stored[rowNum] = trList.eq(rowNum).children().eq(1).children().eq(0).val();
     localStorage.setItem("scheduler", JSON.stringify(stored));
-
 });
 
 revBtn.on("click", function (e) {
     let rowNum = parseInt($(e.target).attr("id"));
     trList.eq(rowNum).children().eq(1).children().eq(0).val(stored[rowNum]);
     localStorage.setItem("scheduler", JSON.stringify(stored));
-
 });
 
 function updateChart() {
-
     let now = moment();
     let hour = parseInt(now.format("HH"));
-
     for (let j = 0; j < trList.length; j++) {
         if(parseInt(trList.eq(j).attr("data-hour")) < hour){
             trList.eq(j).attr("id", "past");
@@ -51,4 +47,4 @@ updateChart()
 
 var renderer = setInterval(function(){
     updateChart();
-}, 60000);
+}, 30000);
